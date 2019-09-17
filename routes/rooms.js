@@ -35,7 +35,9 @@ router.post('/', isAuthenticated, function (req, res, next) {
 // GET /rooms/:room_id/edit
 router.get('/:room_id/edit', isAuthenticated, function (req, res, next) {
   Room.findById(req.params.room_id).then((room) => {
-    if (room.owner !== req.user._id) {
+    console.log("room.owner", room.owner)
+    console.log("req.user._id", req.user._id)
+    if (!room.owner.equals(req.user._id)) {
       res.redirect('/login')
     } else {
       res.render('rooms/edit', { room })
@@ -48,7 +50,7 @@ router.post('/:room_id', isAuthenticated, function (req, res, next) {
   let { name, description } = req.body
 
   Room.findById(req.params.room_id).then((room) => {
-    if (room.owner !== req.user._id) {
+    if (!room.owner.equals(req.user._id)) {
       res.redirect('/login')
     } else {
       Room.findByIdAndUpdate(req.params.room_id, { name, description }).then(() => {
