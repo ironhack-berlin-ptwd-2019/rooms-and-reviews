@@ -1,0 +1,9 @@
+{{#each rooms}}
+<h4>{{this.name}}</h4>
+<p>{{this.description}}</p>
+<a href="/rooms/{{this._id}}/edit">EDIT</a>
+{{/each}}
+
+{{#if user}}
+<a href="/rooms/add">Add a new room</a>
+{{/if}}

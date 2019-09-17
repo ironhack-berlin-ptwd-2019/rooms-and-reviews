@@ -41,11 +41,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
+var roomsRouter = require('./routes/rooms');
 
 app.use('/', indexRouter);
 app.use('/', authRouter); // /login instead of /auth/login
 // app.use('/auth', authRouter);  // /auth/login would look like this
 app.use('/users', usersRouter);
+app.use('/rooms', roomsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
